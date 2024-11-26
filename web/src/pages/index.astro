@@ -10,7 +10,8 @@ import Drawing from '../components/drawing.svelte'
 		<title>Astro</title>
 	</head>
 	<body>
-		<div class="skeleton h-32 w-32"></div>
-		<Drawing client:load />
+		<main class="w-full grid place-items-center min-h-screen h-full" >
+			<Drawing client:load />
+		</main>
 	</body>
 </html>
