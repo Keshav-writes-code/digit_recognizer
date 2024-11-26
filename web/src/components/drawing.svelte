@@ -1,31 +1,63 @@
 <script lang="ts">
+  // this effect block is used as a Initlize function (To avoid using onMount)
+  $effect(init)
+  function init() {
+    resizeCanvasToParent(100,100)
+  }
+  function resizeCanvasToParent() {
+    if (!canvas) return
+    canvas.width = canvas.parentElement?.offsetWidth
+    canvas.height = canvas.parentElement?.offsetHeight
+  }
+  
   let canvas: HTMLCanvasElement | null = null;
-
   let mouse_x: number|null = $state(null);
   let mouse_y: number|null = $state(null);
   let prevMouse_x = 0;
   let prevMouse_y = 0;
   let ctx = $state<CanvasRenderingContext2D| null>()
+  let lineWidth = $state(50)
+  let isDrawing = false
 
-  $effect(()=>{
+  function handleDraw(x: number, y: number) {
     ctx = canvas?.getContext('2d')
-    if (!ctx || !mouse_x || !mouse_y) return
-    ctx.lineWidth = 30
+    if (!ctx || !isDrawing ) return
+    ctx.lineWidth = lineWidth
     ctx.lineCap="round";
     ctx.beginPath()
     ctx.moveTo(prevMouse_x,prevMouse_y);
-    ctx.lineTo(mouse_x, mouse_y)
+    ctx.lineTo(x, y)
     ctx.strokeStyle = "white"
     ctx.stroke()
-    prevMouse_x = mouse_x
-    prevMouse_y = mouse_y
-  })
-
-  function handleMouseMove(e: MouseEvent){
-    mouse_x = e.offsetX
-    mouse_y = e.offsetY
+    prevMouse_x = x
+    prevMouse_y = y
   }
+  
+  $effect(()=>{
+    if (!mouse_x || !mouse_y) return
+    handleDraw(mouse_x,mouse_y)
+  })
 </script>
-
-<canvas height="100" width="" class=" " bind:this={canvas} onmousemove={handleMouseMove} ></canvas>
-<button class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height)}} >Clear</button>
+<div class="">
+  <div class="artboard artboard-horizontal phone-5 bg-base-300 rounded-2xl">
+    <canvas height="400" width="1090" class=" " bind:this={canvas}
+      onmousemove={e=>{
+        mouse_x = e.offsetX
+        mouse_y = e.offsetY
+      }}
+      onmousedown={(e)=>{
+        isDrawing = true;
+        prevMouse_x = e.offsetX
+        prevMouse_y = e.offsetY
+      }}
+      onmouseup={(e)=>{
+        isDrawing = false
+      }}
+    >
+    </canvas>
+  </div>
+  <div class="flex items-center" >
+    <button class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height)}} > <div class="i-tabler:trash size-5"></div> </button>
+    <input type="range" bind:value={lineWidth} min="20" max="100" class="range max-w-40" />
+  </div>
+</div>
