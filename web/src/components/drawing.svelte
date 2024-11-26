@@ -16,7 +16,7 @@
   let prevMouse_x = 0;
   let prevMouse_y = 0;
   let ctx = $state<CanvasRenderingContext2D| null>()
-  let lineWidth = $state(50)
+  let lineWidth = $state(40)
   let isDrawing = false
 
   function handleDraw(x: number, y: number) {
@@ -38,8 +38,10 @@
     handleDraw(mouse_x,mouse_y)
   })
 </script>
+
+
 <div class="">
-  <div class="artboard artboard-horizontal phone-5 bg-base-300 rounded-2xl">
+  <div class="artboard artboard-demo artboard-horizontal phone-5">
     <canvas height="400" width="1090" class=" " bind:this={canvas}
       onmousemove={e=>{
         mouse_x = e.offsetX
