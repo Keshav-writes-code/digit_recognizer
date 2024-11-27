@@ -7,6 +7,7 @@
   let ctx = $state<CanvasRenderingContext2D| null>()
   let lineWidth = $state(40)
   let isDrawing = false
+  let isCanvasEmpty = $state(true)
 
   function handleDraw(x: number, y: number) {
     ctx = canvas?.getContext('2d')
@@ -62,7 +63,9 @@
 
 <div class="w-full flex flex-col items-center justify-center">
   <div class="w-full max-w-5xl" >
-    <div class="artboard artboard-demo w-full overflow-hidden shadow-xl ">
+    <div class="artboard artboard-demo w-full overflow-hidden shadow-xl relative">
+      <div class="{isCanvasEmpty? '' : 'opacity-0'} transition-opacity text-blueGray font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"> - Draw Here - </div>
+      
       <canvas height="500" width="1" class="touch-manipulation" bind:this={canvas}
         onmousemove={e=>{
           mouse_x = e.offsetX
@@ -72,12 +75,14 @@
           isDrawing = true;
           prevMouse_x = e.offsetX
           prevMouse_y = e.offsetY
+          isCanvasEmpty = false
         }}
         onmouseup={(e)=>{
           isDrawing = false
         }}
         ontouchstart={(e)=>{
           if (!canvas) return
+          isCanvasEmisCanvasEmptypty = false
           isDrawing = true;
           let rect = canvas.getBoundingClientRect()
           prevMouse_x = e.touches[0].clientX - rect.left
@@ -90,7 +95,7 @@
       </canvas>
     </div>
     <div class="flex items-center px-4" >
-      <button class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height)}} > <div class="i-tabler:trash size-5 text-red"></div> </button>
+      <button class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height), isCanvasEmpty = true}} > <div class="i-tabler:trash size-5 text-red"></div> </button>
       <div class="dropdown dropdown-bottom">
         <div tabindex="0" role="button" class="btn m-1"> <div class="i-material-symbols:line-weight-rounded size-5"></div> </div>
         <div class="dropdown-content menu bg-base-200 rounded-box z-[1] w-60 shadow px-4 py-2" >
