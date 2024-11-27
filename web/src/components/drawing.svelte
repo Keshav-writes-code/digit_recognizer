@@ -1,16 +1,4 @@
 <script lang="ts">
-  // this effect block is used as a Initlize function (To avoid using onMount)
-  $effect(init)
-  function init() {
-    resizeCanvasToParent(100,100)
-    window.addEventListener('resize', resizeCanvasToParent)
-  }
-  function resizeCanvasToParent() {
-    if (!canvas) return
-    canvas.width = canvas.parentElement?.offsetWidth
-    canvas.height = canvas.parentElement?.offsetHeight
-  }
-  
   let canvas: HTMLCanvasElement | null = null;
   let mouse_x: number|null = $state(null);
   let mouse_y: number|null = $state(null);
@@ -36,10 +24,26 @@
     prevMouse_y = y
   }
   
+  function resizeCanvasToParent() {
+    if (!canvas) return
+    canvas.width = canvas.parentElement?.offsetWidth
+    canvas.height = canvas.parentElement?.offsetHeight
+  }
+
+  // ----------------
+  // Reactivity Stuff
+  // ----------------
   $effect(()=>{
     if (!mouse_x || !mouse_y) return
     handleDraw(mouse_x,mouse_y)
   })
+  // this effect block is used as a Initlize function (To avoid using onMount)
+  $effect(init)
+  function init() {
+    resizeCanvasToParent(100,100)
+    window.addEventListener('resize', resizeCanvasToParent)
+  }
+  
 </script>
 
 
@@ -68,6 +72,9 @@
         let rect = canvas.getBoundingClientRect()
         mouse_x = e.touches[0].clientX - rect.left
         mouse_y = e.touches[0].clientY - rect.top
+      }}
+      ontouchend={(e)=>{
+        isDrawing = false
       }}
     >
     </canvas>
