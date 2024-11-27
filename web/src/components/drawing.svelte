@@ -65,7 +65,7 @@
       <div class="dropdown-content menu bg-base-200 rounded-box z-[1] w-60 shadow" style="padding: 1rem; padding-top: 0.5rem;" >
         <label class="">
           <div class="label">
-            <span class="label-text">Weight</span>
+            <span class="label-text">Weight <span class="badge" >px</span> </span>
           </div>
           <div class="flex place-items-center gap-4">
             <input type="range" bind:value={lineWidth} min="20" max="100" class="range max-w-40" />
