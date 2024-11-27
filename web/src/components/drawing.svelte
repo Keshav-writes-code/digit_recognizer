@@ -42,6 +42,19 @@
   function init() {
     resizeCanvasToParent(100,100)
     window.addEventListener('resize', resizeCanvasToParent)
+    setEventHandlers()
+  }
+
+  // ----------------
+  // Events Stuff
+  // ----------------
+  function setEventHandlers() {
+    canvas.addEventListener('touchmove', (e)=>{
+      e.preventDefault()
+      let rect = canvas.getBoundingClientRect()
+      mouse_x = e.touches[0].clientX - rect.left
+      mouse_y = e.touches[0].clientY - rect.top
+    },false)
   }
   
 </script>
@@ -67,11 +80,6 @@
         let rect = canvas.getBoundingClientRect()
         prevMouse_x = e.offsetX - rect.left
         prevMouse_y = e.offsetY - rect.top
-      }}
-      ontouchmove={(e)=>{
-        let rect = canvas.getBoundingClientRect()
-        mouse_x = e.touches[0].clientX - rect.left
-        mouse_y = e.touches[0].clientY - rect.top
       }}
       ontouchend={(e)=>{
         isDrawing = false
