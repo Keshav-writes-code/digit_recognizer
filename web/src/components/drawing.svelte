@@ -82,7 +82,7 @@
         }}
         ontouchstart={(e)=>{
           if (!canvas) return
-          isCanvasEmisCanvasEmptypty = false
+          isCanvasEmpty = false
           isDrawing = true;
           let rect = canvas.getBoundingClientRect()
           prevMouse_x = e.touches[0].clientX - rect.left
