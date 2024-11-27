@@ -59,8 +59,8 @@
 
 
 <div class="w-full flex flex-col items-center justify-center">
-  <div class="artboard artboard-demo w-full max-w-3xl overflow-hidden">
-    <canvas height="400" width="1" class=" touch-manipulation" bind:this={canvas}
+  <div class="artboard artboard-demo w-full max-w-3xl overflow-hidden shadow-xl ">
+    <canvas height="500" width="1" class=" touch-manipulation" bind:this={canvas}
       onmousemove={e=>{
         mouse_x = e.offsetX
         mouse_y = e.offsetY
@@ -85,7 +85,7 @@
     >
     </canvas>
   </div>
-  <div class="flex items-center w-full px-4 max-w-3xl" >
+  <div class="flex items-center w-full px-4 max-w-3xl isolate" >
     <button class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height)}} > <div class="i-tabler:trash size-5 text-red"></div> </button>
     <div class="dropdown dropdown-bottom">
       <div tabindex="0" role="button" class="btn m-1"> <div class="i-material-symbols:line-weight-rounded size-5"></div> </div>
