@@ -8,8 +8,6 @@
   let lineWidth = $state(40)
   let isDrawing = false
 
-  let dropdownVisible=$state(false)
-
   function handleDraw(x: number, y: number) {
     ctx = canvas?.getContext('2d')
     if (!ctx || !isDrawing ) return
@@ -87,11 +85,11 @@
     >
     </canvas>
   </div>
-  <div class="flex items-center" >
+  <div class="flex items-center w-full px-4 max-w-3xl" >
     <button class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height)}} > <div class="i-tabler:trash size-5"></div> </button>
     <div class="dropdown dropdown-bottom">
-      <div tabindex="0" role="button" class="btn m-1" onclick={()=>{dropdownVisible = !dropdownVisible}} > <div class="i-material-symbols:line-weight-rounded size-5"></div> </div>
-      <div class=" {dropdownVisible?'':'hidden'} dropdown-content menu bg-base-200 rounded-box z-[1] w-60 shadow px-4 py-2" >
+      <div tabindex="0" role="button" class="btn m-1"> <div class="i-material-symbols:line-weight-rounded size-5"></div> </div>
+      <div class="dropdown-content menu bg-base-200 rounded-box z-[1] w-60 shadow px-4 py-2" >
         <label>
           <div class="label">
             <span class="label-text">Weight <span class="badge" >px</span> </span>
