@@ -5,7 +5,8 @@ export default {
     "./src/**/*.{svelte,html,astro}"
   ],
 	corePlugins: [
-    "backgroundColor"
+    "backgroundColor",
+    "borderRadius"
   ],
   plugins: [daisyui],
 	daisyui:{
