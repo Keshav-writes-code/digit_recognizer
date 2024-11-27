@@ -3,6 +3,7 @@
   $effect(init)
   function init() {
     resizeCanvasToParent(100,100)
+    window.addEventListener('resize', resizeCanvasToParent)
   }
   function resizeCanvasToParent() {
     if (!canvas) return
@@ -40,13 +41,13 @@
 </script>
 
 
-<div class="">
-  <div class="artboard artboard-demo phone-5">
-    <canvas height="400" width="1090" class=" touch-manipulation" bind:this={canvas}
+<div class="w-full flex flex-col items-center justify-center">
+  <div class="artboard artboard-demo w-full max-w-3xl overflow-hidden">
+    <canvas height="400" width="1" class=" touch-manipulation" bind:this={canvas}
       onmousemove={e=>{
         mouse_x = e.offsetX
         mouse_y = e.offsetY
-      }}
+      }} 
       onmousedown={(e)=>{
         isDrawing = true;
         prevMouse_x = e.offsetX
@@ -55,6 +56,17 @@
       onmouseup={(e)=>{
         isDrawing = false
       }}
+      ontouchstart={(e)=>{
+        isDrawing = true;
+        let rect = canvas.getBoundingClientRect()
+        prevMouse_x = e.offsetX - rect.left
+        prevMouse_y = e.offsetY - rect.top
+      }}
+      ontouchmove={(e)=>{
+        let rect = canvas.getBoundingClientRect()
+        mouse_x = e.touches[0].clientX - rect.left
+        mouse_y = e.touches[0].clientY - rect.top
+      }}
     >
     </canvas>
   </div>
@@ -62,7 +74,7 @@
     <button class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height)}} > <div class="i-tabler:trash size-5"></div> </button>
     <div class="dropdown dropdown-bottom">
       <div tabindex="0" role="button" class="btn m-1"> <div class="i-material-symbols:line-weight-rounded size-5"></div> </div>
-      <div class="dropdown-content menu bg-base-200 rounded-box z-[1] w-60 shadow" style="padding: 1rem; padding-top: 0.5rem;" >
+      <div class="dropdown-content menu bg-base-200 rounded-box z-[1] w-60 shadow px-4 py-2" >
         <label class="">
           <div class="label">
             <span class="label-text">Weight <span class="badge" >px</span> </span>
