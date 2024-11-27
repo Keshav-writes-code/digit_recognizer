@@ -42,7 +42,7 @@
 
 <div class="">
   <div class="artboard artboard-demo lt-sm:artboard-horizontal phone-5">
-    <canvas height="400" width="1090" class=" " bind:this={canvas}
+    <canvas height="400" width="1090" class=" touch-manipulation" bind:this={canvas}
       onmousemove={e=>{
         mouse_x = e.offsetX
         mouse_y = e.offsetY
