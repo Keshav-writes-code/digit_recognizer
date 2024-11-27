@@ -21,6 +21,7 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
+    "@iconify-json/material-symbols": "^1.2.8",
     "@iconify-json/tabler": "^1.2.8",
     "@unocss/preset-icons": "^0.64.1",
     "@unocss/preset-mini": "^0.62.4",
