@@ -60,6 +60,21 @@
   </div>
   <div class="flex items-center" >
     <button class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height)}} > <div class="i-tabler:trash size-5"></div> </button>
-    <input type="range" bind:value={lineWidth} min="20" max="100" class="range max-w-40" />
+    <div class="dropdown dropdown-bottom">
+      <div tabindex="0" role="button" class="btn m-1"> <div class="i-material-symbols:line-weight-rounded size-5"></div> </div>
+      <div class="dropdown-content menu bg-base-200 rounded-box z-[1] w-60 shadow" style="padding: 1rem; padding-top: 0.5rem;" >
+        <label class="">
+          <div class="label">
+            <span class="label-text">Weight</span>
+          </div>
+          <div class="flex place-items-center gap-4">
+            <input type="range" bind:value={lineWidth} min="20" max="100" class="range max-w-40" />
+            <input type="text" bind:value={lineWidth} style="padding-left: 0; padding-right: 0;" class=" input input-bordered w-full max-w-12 text-align-center " />
+          </div>
+        </label>
+        
+      </div>
+    </div>
+    
   </div>
 </div>
