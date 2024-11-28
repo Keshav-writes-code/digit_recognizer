@@ -57,16 +57,15 @@
       mouse_y = e.touches[0].clientY - rect.top
     },false)
   }
-  
 </script>
 
 
 <div class="w-full flex flex-col items-center justify-center">
   <div class="w-full max-w-5xl" >
     <div class="artboard artboard-demo w-full overflow-hidden shadow-xl relative b-2 b-dashed b-blue-4/30">
-      <p class="{isCanvasEmpty? '' : 'opacity-0'} transition-opacity text-blueGray font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"> - Draw Here - </p>
-      
-      <canvas height="500" width="1" class="touch-manipulation" bind:this={canvas}
+      <p class="{isCanvasEmpty? '' : 'opacity-0'} select-nonex pointer-events-none transition-opacity text-blueGray font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"> - Draw Here - </p>
+      <div aria-label="mouse-tracker" class=" shadow-xl select-none absolute rounded-full b-3 pointer-events-none" style="left: {mouse_x-(lineWidth/2)}px; top: {mouse_y-(lineWidth/2)}px; width: {lineWidth}px; height: {lineWidth}px" ></div>
+      <canvas height="500" width="1" class="touch-manipulation cursor-none" bind:this={canvas}
         onmousemove={e=>{
           mouse_x = e.offsetX
           mouse_y = e.offsetY
