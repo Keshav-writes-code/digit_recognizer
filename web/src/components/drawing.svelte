@@ -63,8 +63,8 @@
 
 <div class="w-full flex flex-col items-center justify-center">
   <div class="w-full max-w-5xl" >
-    <div class="artboard artboard-demo w-full overflow-hidden shadow-xl relative">
-      <div class="{isCanvasEmpty? '' : 'opacity-0'} transition-opacity text-blueGray font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"> - Draw Here - </div>
+    <div class="artboard artboard-demo w-full overflow-hidden shadow-xl relative b-2 b-dashed b-blue-4/30">
+      <p class="{isCanvasEmpty? '' : 'opacity-0'} transition-opacity text-blueGray font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"> - Draw Here - </p>
       
       <canvas height="500" width="1" class="touch-manipulation" bind:this={canvas}
         onmousemove={e=>{
