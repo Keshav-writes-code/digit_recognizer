@@ -6,7 +6,7 @@
   let prevMouse_y = 0;
   let ctx = $state<CanvasRenderingContext2D| null>()
   let lineWidth = $state(40)
-  let isDrawing = false
+  let isDrawing = $state(false)
   let isCanvasEmpty = $state(true)
 
   function handleDraw(x: number, y: number) {
@@ -22,7 +22,6 @@
     prevMouse_x = x
     prevMouse_y = y
   }
-  
   function resizeCanvasToParent() {
     if (!canvas || !canvas.parentElement) return
     canvas.width = canvas.parentElement.offsetWidth
@@ -64,7 +63,7 @@
   <div class="w-full max-w-5xl" >
     <div class="artboard artboard-demo w-full overflow-hidden shadow-xl relative b-2 b-dashed b-blue-4/30">
       <p class="{isCanvasEmpty? '' : 'opacity-0'} select-nonex pointer-events-none transition-opacity text-blueGray font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"> - Draw Here - </p>
-      <div aria-label="mouse-tracker" class=" shadow-xl select-none absolute rounded-full b-3 pointer-events-none" style="left: {mouse_x-(lineWidth/2)}px; top: {mouse_y-(lineWidth/2)}px; width: {lineWidth}px; height: {lineWidth}px" ></div>
+      <div aria-label="mouse-tracker" class=" { isDrawing ? 'shadow-sm': 'shadow-md scale-102'} transition duration-250 select-none absolute rounded-full b-3 pointer-events-none" style="left: {mouse_x-(lineWidth/2)}px; top: {mouse_y-(lineWidth/2)}px; width: {lineWidth}px; height: {lineWidth}px" ></div>
       <canvas height="500" width="1" class="touch-manipulation cursor-none" bind:this={canvas}
         onmousemove={e=>{
           mouse_x = e.offsetX
@@ -94,7 +93,7 @@
       </canvas>
     </div>
     <div class="flex items-center px-4" >
-      <button class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height), isCanvasEmpty = true}} > <div class="i-tabler:trash size-5 text-red"></div> </button>
+      <button aria-label="clear-canvas"  class="btn" onclick={()=>{ctx?.clearRect(0,0, canvas?.width, canvas?.height), isCanvasEmpty = true}} > <div class="i-tabler:trash size-5 text-red"></div> </button>
       <div class="dropdown dropdown-bottom">
         <div tabindex="0" role="button" class="btn m-1"> <div class="i-material-symbols:line-weight-rounded size-5"></div> </div>
         <div class="dropdown-content menu bg-base-200 rounded-box z-[1] w-60 shadow px-4 py-2" >
