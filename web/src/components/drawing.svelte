@@ -8,6 +8,7 @@
   let lineWidth = $state(40)
   let isDrawing = $state(false)
   let isCanvasEmpty = $state(true)
+  let eraseOnEachDraw = $state(false)
 
   function handleDraw(x: number, y: number) {
     ctx = canvas?.getContext('2d')
@@ -27,8 +28,8 @@
     canvas.width = canvas.parentElement.offsetWidth
     canvas.height = canvas.parentElement.offsetHeight
   }
-
-  function get28x28Image(canvas: HTMLCanvasElement) {
+  function get28x28Image(canvas: HTMLCanvasElement | null ) {
+    if (!canvas) return
     let ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -104,6 +105,11 @@
     // Return the final image as a base64 URL
     return finalCanvas.toDataURL();
   }
+  function cleaCanvas(canvas: HTMLCanvasElement | null){
+    if (!canvas) return
+    ctx?.clearRect(0,0, canvas?.width, canvas?.height)
+    isCanvasEmpty = true
+  }
 
   // ----------------
   // Reactivity Stuff
@@ -154,8 +160,10 @@
         }}
         onmouseup={(e)=>{
           isDrawing = false
-          if (!canvas) return
           get28x28Image(canvas)
+          if (eraseOnEachDraw){
+            cleaCanvas(canvas)
+          }
         }}
         ontouchstart={(e)=>{
           if (!canvas) return
@@ -174,9 +182,7 @@
     <div class="flex items-center px-4" >
       <button aria-label="clear-canvas"  class="btn"
         onclick={()=>{
-          if (!canvas) return
-          ctx?.clearRect(0,0, canvas?.width, canvas?.height)
-          isCanvasEmpty = true
+          cleaCanvas(canvas)
         }}
       >
         <div class="i-tabler:trash size-5 text-red"></div>
@@ -195,7 +201,10 @@
           </label>
         </div>
       </div>
+      <div class=" bg-base-200 h-12 grid place-items-center px-2 rounded-lg">
+        <input type="checkbox" class="toggle" bind:checked={eraseOnEachDraw} />
+      </div>
     </div>
   </div>
-  <canvas id="canvas2" height="500" width="500" class="size-200" ></canvas>
+  <canvas id="canvas2" height="500" width="500" class="size-100" ></canvas>
 </div>
