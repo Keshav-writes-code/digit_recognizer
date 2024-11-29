@@ -206,5 +206,5 @@
       </div>
     </div>
   </div>
-  <canvas id="canvas2" height="500" width="500" class="size-100" ></canvas>
+  <canvas id="canvas2" height="500" width="500" class="w-full max-w-100 aspect-square" ></canvas>
 </div>
