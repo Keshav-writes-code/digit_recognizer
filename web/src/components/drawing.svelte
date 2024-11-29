@@ -147,7 +147,8 @@
     <div class="artboard artboard-demo w-full overflow-hidden shadow-xl relative b-2 b-dashed b-blue-4/30">
       <p class="{isCanvasEmpty? '' : 'opacity-0'} select-nonex pointer-events-none transition-opacity text-blueGray font-bold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"> - Draw Here - </p>
       <div aria-label="mouse-tracker" class=" { isDrawing ? 'shadow-sm': 'shadow-md scale-102'} transition duration-250 select-none absolute rounded-full b-3 pointer-events-none" style="left: {mouse_x-(lineWidth/2)}px; top: {mouse_y-(lineWidth/2)}px; width: {lineWidth}px; height: {lineWidth}px" ></div>
-      <canvas height="500" width="1" class="touch-manipulation cursor-none" bind:this={canvas}
+      <canvas height="500" width="1" class="touch-manipulation cursor-none outline-none" bind:this={canvas}
+        tabindex="0"
         onmousemove={e=>{
           mouse_x = e.offsetX
           mouse_y = e.offsetY
@@ -175,6 +176,11 @@
         }}
         ontouchend={(e)=>{
           isDrawing = false
+        }}
+        onkeydown={(e)=>{
+          if (e.key === 'Delete'){
+            cleaCanvas(canvas)
+          }
         }}
       >
       </canvas>
