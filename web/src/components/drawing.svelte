@@ -36,8 +36,6 @@
     // Get pixel data from the canvas
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
-
-    // Initialize bounding box coordinates
     let minX = canvas.width, minY = canvas.height, maxX = 0, maxY = 0;
 
     // Find the bounding box
@@ -52,8 +50,6 @@
             }
         }
     }
-
-    // Check if there's a drawing
     if (minX > maxX || minY > maxY) {
         console.log("No drawing found.");
         return null;
