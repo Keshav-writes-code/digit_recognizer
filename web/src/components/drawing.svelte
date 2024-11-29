@@ -173,9 +173,15 @@
           let rect = canvas.getBoundingClientRect()
           prevMouse_x = e.touches[0].clientX - rect.left
           prevMouse_y = e.touches[0].clientY - rect.top
+          mouse_x = e.touches[0].clientX - rect.left
+          mouse_y = e.touches[0].clientY - rect.top
         }}
         ontouchend={(e)=>{
           isDrawing = false
+          get28x28Image(canvas)
+          if (eraseOnEachDraw){
+            cleaCanvas(canvas)
+          }
         }}
         onkeydown={(e)=>{
           if (e.key === 'Delete'){
