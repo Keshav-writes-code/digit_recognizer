@@ -1,5 +1,5 @@
 
-# Project Title
+# Digit Recognizer
 
 A Handwritten Digit Recognizer Built with Deep Learning & Latest Web Tech.
 
